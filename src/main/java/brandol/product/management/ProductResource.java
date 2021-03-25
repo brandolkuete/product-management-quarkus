@@ -2,15 +2,23 @@ package brandol.product.management;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 @Path("/products")
 public class ProductResource {
-
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "Welcome in the stored";
-    }
+	
+	String[] products = {"Books", "Computers", "Fruits","Phones"};
+		
+	@GET
+	public String getAllProducts() {
+		return String.join(", ", products);
+	}
+		
+	@GET
+	@Path("/{index}")
+	public String getProduct(@PathParam("index") int index) {
+		return products[index];
+	}
+	
 }
